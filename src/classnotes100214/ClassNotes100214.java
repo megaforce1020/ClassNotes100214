@@ -24,10 +24,13 @@ public class ClassNotes100214 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) 
+            throws IOException, InputMismatchException {
         // TODO code application logic here
+        
         Scanner console = new Scanner(System.in);
         int number, error = 0, result, stop;
+        
         String name = "", reply ="";
         String titles = null;
         //only objects can be null, not primitives
@@ -70,7 +73,8 @@ public class ClassNotes100214 {
             System.out.println("Your name is " +name);
             
             stringToSave.append(name).append("\t").append(number).append("\n");
-            
+            String str = stringToSave.toString();
+            writeToFile(str);
         
         }
         //whenever you read some text after some number you need to do two .nextLine()
@@ -78,9 +82,10 @@ public class ClassNotes100214 {
             System.out.println("Goodbye");
         }catch(InputMismatchException ime) {
             error = -1;
-            System.out.println("You Did not enter a number " +ime);
+            System.err.println("You did not enter a number " +ime);
             console.nextLine();
         }
+        
         }while(error==-1);
         
         BufferedWriter outputBuff = new BufferedWriter(
@@ -102,8 +107,14 @@ public class ClassNotes100214 {
         
     }
     
+    public static void writeToFile (String str2)  throws IOException{
+        
+        BufferedWriter outputBuff = new BufferedWriter(
+                                        new FileWriter("outfile.txt", true));
+        
+        
+        outputBuff.write(str2);
+        outputBuff.flush();
+    }
+    
 }
-
-    
-    
-
